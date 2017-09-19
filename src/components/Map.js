@@ -19,7 +19,6 @@ const Map = ({ location, venues }) => (
         coordinate={{ latitude: venue.lat, longitude: venue.lon }}
         image={BitcoinImg}
         title={venue.name}
-        style={{height: 100}}
       />
    ))}
 </MapView>

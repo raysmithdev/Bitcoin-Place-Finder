@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Platform, StyleSheet, Text, View } from 'react-native'
+import { Platform, StyleSheet, Text, View, ActivityIndicator, StatusBar } from 'react-native'
 import { Constants, Location, Permissions } from 'expo'
 import Map from './Map'
 
@@ -7,6 +7,8 @@ class Dashboard extends Component {
 
   static navigationOptions = {
     title: 'Splash',
+    headerLeft: null,
+    header: null
   }
 
   state = {
@@ -41,14 +43,14 @@ class Dashboard extends Component {
     fetch(url)
     .then(res => res.json())
     .then(json => this.setState({ location, loading: false, venues: json.venues }))
-
-
   };
 
   render() {
     return (
       <View style={styles.container}>
-        {this.state.loading ? <Text>Loading</Text> :
+        <StatusBar hidden={true} />
+        {this.state.loading ?
+          <ActivityIndicator style={styles.loader} size={'large'} /> :
           <Map {...this.state}/>
         }
       </View>
@@ -60,6 +62,11 @@ const styles = StyleSheet.create({
   container: {
     ...StyleSheet.absoluteFillObject
   },
+  loader: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  }
 })
 
 export default Dashboard
