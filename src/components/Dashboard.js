@@ -38,8 +38,6 @@ class Dashboard extends Component {
 
     let url = `https://coinmap.org/api/v1/venues?lat2=${location.coords.latitude}&lon2=${location.coords.latitude}`
 
-    console.log(url);
-
     fetch(url)
     .then(res => res.json())
     .then(json => this.setState({ location, loading: false, venues: json.venues }))
